@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fishing Rush — a tiny arcade fishing game</title>
+<meta name="description" content="Fishing Rush: a 60-second arcade fishing game in the browser. Cast, wait for the bite, keep the marker in the green and reel in rare fish. Built with TypeScript and Canvas 2D by Remike Dev.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-head">
+  <div class="title-card">
+    <p class="kicker">REMIKE DEV · BROWSER MINIGAME</p>
+    <h1>Fishing <span class="hl">Rush</span></h1>
+    <p class="tagline">60 seconds. One rod. How many points can you land?</p>
+  </div>
+</header>
+
+<main class="layout">
+  <section class="game-card" aria-label="Fishing Rush game">
+    <div class="hud">
+      <div class="chip chip-yellow"><span class="chip-label">SCORE</span><span class="chip-value" id="scoreVal">0</span></div>
+      <div class="chip chip-blue" id="timeChip"><span class="chip-label">TIME</span><span class="chip-value"><span id="timeVal">60</span>s</span></div>
+      <div class="chip chip-green"><span class="chip-label">CAUGHT</span><span class="chip-value" id="catchVal">0</span></div>
+      <button class="btn btn-small" id="restartBtn" type="button">Restart</button>
+    </div>
+
+    <div class="stage" id="stage">
+      <canvas id="game" width="880" height="540"></canvas>
+
+      <div class="catch-card hidden" id="catchCard">
+        <p class="catch-eyebrow">CAUGHT!</p>
+        <p class="catch-name" id="catchName">Sardine</p>
+        <p class="catch-meta" id="catchMeta">Common · +10 pts</p>
+      </div>
+
+      <div class="overlay" id="overlay">
+        <div class="overlay-box">
+          <h2 id="overlayTitle">FISHING RUSH</h2>
+          <p id="overlayText"></p>
+          <button class="btn btn-big" id="overlayBtn" type="button">Start fishing</button>
+        </div>
+      </div>
+    </div>
+
+    <p class="message" id="message" role="status"></p>
+
+    <button class="btn btn-action" id="actionBtn" type="button">CAST · HOLD TO REEL</button>
+    <p class="hint">Mouse / touch: click the water to cast, click fast when a fish bites, then press &amp; hold to reel. Keyboard: hold <kbd>Space</kbd> the same way.</p>
+  </section>
+
+  <aside class="side">
+    <div class="panel panel-howto">
+      <h2>How to play</h2>
+      <ol>
+        <li><strong>Cast</strong> — click, tap, or press Space.</li>
+        <li><strong>Wait</strong> — a shadow fish is circling your bobber…</li>
+        <li><strong>Strike!</strong> — when the <span class="bang">!</span> pops, click again <em>fast</em> or it escapes.</li>
+        <li><strong>Reel</strong> — hold to raise the pink marker, release to let it sink. Keep it inside the <span class="green-word">green zone</span> to gain progress.</li>
+        <li><strong>Don't snap the line</strong> — if the marker pins at either end, strain builds. Full strain = broken line.</li>
+      </ol>
+      <p class="fish-table-title">On the line:</p>
+      <ul class="fish-table">
+        <li><span>Sardine</span><b>10 pts</b></li>
+        <li><span>River Bass</span><b>25 pts</b></li>
+        <li><span>Blue Catfish</span><b>45 pts</b></li>
+        <li><span>Koi</span><b>90 pts</b></li>
+        <li><span>Golden Carp</span><b>180 pts</b></li>
+        <li><span>Rainbow Trout</span><b>350 pts</b></li>
+      </ul>
+    </div>
+
+    <div class="panel panel-log">
+      <h2>Latest catches</h2>
+      <ul class="catch-log" id="catchLog">
+        <li class="empty">Nothing yet — the fish are waiting.</li>
+      </ul>
+    </div>
+  </aside>
+</main>
+
+<footer class="site-foot">
+  <p>Built by <strong>Remike Dev</strong> · TypeScript + Canvas 2D · No assets, everything is drawn in code.</p>
+</footer>
+
+<script src="game.js"></script>
+</body>
+</html>

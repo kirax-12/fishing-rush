@@ -1,0 +1,356 @@
+/* Fishing Rush — playful neo-brutalism: cream paper, ink borders, hard shadows, flat candy accents. */
+
+:root {
+  --paper: #fff8ec;
+  --ink: #1c1c1c;
+  --yellow: #ffd23f;
+  --pink: #ff90e8;
+  --blue: #7ab8ff;
+  --green: #4ade80;
+  --white: #ffffff;
+  --shadow: 7px 7px 0 var(--ink);
+  --shadow-sm: 4px 4px 0 var(--ink);
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Space Grotesk", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  padding: 28px 16px 40px;
+}
+
+h1, h2 { font-weight: 700; letter-spacing: -0.01em; }
+
+/* ---------- header ---------- */
+
+.site-head {
+  max-width: 1180px;
+  margin: 0 auto 22px;
+}
+
+.title-card {
+  display: inline-block;
+  background: var(--white);
+  border: 2px solid var(--ink);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 18px 26px 16px;
+  transform: rotate(-1.2deg);
+}
+
+.kicker {
+  font-family: "Space Mono", ui-monospace, monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  margin: 0 0 4px;
+}
+
+.title-card h1 {
+  font-size: clamp(40px, 6vw, 64px);
+  line-height: 0.95;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.title-card h1 .hl {
+  background: var(--yellow);
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  padding: 0 10px;
+  display: inline-block;
+  transform: rotate(1.5deg);
+}
+
+.tagline {
+  font-family: "Caveat", "Segoe Print", cursive;
+  font-size: 20px;
+  margin: 8px 0 0;
+}
+
+/* ---------- layout ---------- */
+
+.layout {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 26px;
+  align-items: start;
+}
+
+@media (max-width: 980px) {
+  .layout { grid-template-columns: 1fr; }
+}
+
+/* ---------- game card ---------- */
+
+.game-card {
+  background: var(--white);
+  border: 2px solid var(--ink);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: 16px;
+  transform: rotate(-0.3deg);
+}
+
+.hud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: stretch;
+  margin-bottom: 14px;
+}
+
+.chip {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  padding: 6px 14px;
+  box-shadow: var(--shadow-sm);
+  font-family: "Space Mono", ui-monospace, monospace;
+}
+
+.chip-yellow { background: var(--yellow); }
+.chip-blue { background: var(--blue); }
+.chip-green { background: var(--green); }
+
+.chip-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; }
+.chip-value { font-size: 20px; font-weight: 700; }
+
+.chip.urgent {
+  background: #ff5a5a;
+  color: var(--white);
+  animation: pulse 0.5s infinite alternate;
+}
+
+@keyframes pulse {
+  from { transform: scale(1); }
+  to { transform: scale(1.07) rotate(-1deg); }
+}
+
+/* ---------- stage ---------- */
+
+.stage {
+  position: relative;
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  overflow: hidden;
+  background: #aee3ff;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.stage canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(28, 28, 28, 0.45);
+  padding: 16px;
+}
+
+.overlay.hidden, .hidden { display: none !important; }
+
+.overlay-box {
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 22px 26px;
+  max-width: 440px;
+  text-align: center;
+  transform: rotate(-1deg);
+}
+
+.overlay-box h2 {
+  margin: 0 0 8px;
+  font-size: 34px;
+  text-transform: uppercase;
+}
+
+.overlay-box p { margin: 0 0 16px; font-size: 16px; line-height: 1.45; }
+
+.catch-card {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  padding: 8px 14px 10px;
+  transform: rotate(2.5deg);
+  background: var(--white);
+  animation: pop-in 0.18s ease-out;
+  pointer-events: none;
+  max-width: 60%;
+}
+
+@keyframes pop-in {
+  from { transform: rotate(2.5deg) scale(0.7); opacity: 0; }
+  to { transform: rotate(2.5deg) scale(1); opacity: 1; }
+}
+
+.catch-eyebrow {
+  font-family: "Space Mono", ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  margin: 0;
+}
+
+.catch-name { font-size: 24px; font-weight: 700; margin: 2px 0 0; line-height: 1.05; }
+.catch-meta { font-family: "Space Mono", ui-monospace, monospace; font-size: 13px; margin: 3px 0 0; }
+
+.catch-card[data-rarity="Common"] { background: #eef4f8; }
+.catch-card[data-rarity="Uncommon"] { background: var(--green); }
+.catch-card[data-rarity="Rare"] { background: var(--blue); }
+.catch-card[data-rarity="Epic"] { background: var(--yellow); }
+.catch-card[data-rarity="Legendary"] { background: var(--pink); }
+
+/* ---------- message / buttons ---------- */
+
+.message {
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  min-height: 24px;
+  margin: 14px 4px 10px;
+}
+
+.btn {
+  font-family: inherit;
+  font-weight: 700;
+  color: var(--ink);
+  background: var(--white);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  box-shadow: var(--shadow-sm);
+  padding: 8px 18px;
+  cursor: pointer;
+  transition: transform 0.06s ease, box-shadow 0.06s ease;
+}
+
+.btn:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--ink); }
+.btn:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--ink); }
+
+.btn-small { margin-left: auto; background: var(--pink); }
+
+.btn-big {
+  background: var(--yellow);
+  font-size: 18px;
+  padding: 12px 26px;
+  text-transform: uppercase;
+}
+
+.btn-action {
+  display: block;
+  width: 100%;
+  background: var(--yellow);
+  font-size: 19px;
+  letter-spacing: 0.04em;
+  padding: 13px 18px;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.hint {
+  font-family: "Space Mono", ui-monospace, monospace;
+  font-size: 12.5px;
+  text-align: center;
+  margin: 10px 4px 2px;
+  line-height: 1.5;
+}
+
+.hint kbd {
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 5px;
+  padding: 1px 7px;
+  font-family: inherit;
+}
+
+/* ---------- side panels ---------- */
+
+.side { display: grid; gap: 26px; }
+
+.panel {
+  border: 2px solid var(--ink);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 18px 20px;
+}
+
+.panel-howto { background: var(--white); transform: rotate(0.6deg); }
+.panel-log { background: #fdf3ff; transform: rotate(-0.6deg); }
+
+.panel h2 {
+  margin: 0 0 10px;
+  font-size: 22px;
+  text-transform: uppercase;
+}
+
+.panel-howto ol { margin: 0 0 14px; padding-left: 20px; line-height: 1.55; font-size: 15px; }
+.panel-howto li { margin-bottom: 5px; }
+
+.bang {
+  background: var(--yellow);
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  padding: 0 6px;
+  font-weight: 700;
+}
+
+.green-word { background: var(--green); border-radius: 5px; padding: 0 5px; font-weight: 700; }
+
+.fish-table-title { font-family: "Space Mono", ui-monospace, monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; margin: 0 0 6px; }
+
+.fish-table { list-style: none; margin: 0; padding: 0; font-size: 15px; }
+.fish-table li {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px dashed rgba(28, 28, 28, 0.35);
+  padding: 4px 0;
+}
+.fish-table li:last-child { border-bottom: none; }
+
+.catch-log { list-style: none; margin: 0; padding: 0; font-size: 15px; }
+.catch-log li {
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  box-shadow: 3px 3px 0 var(--ink);
+  padding: 6px 10px;
+  margin-bottom: 8px;
+  background: var(--white);
+  font-weight: 700;
+}
+.catch-log li.empty { font-weight: 500; box-shadow: none; border-style: dashed; }
+.catch-log li[data-rarity="Uncommon"] { background: var(--green); }
+.catch-log li[data-rarity="Rare"] { background: var(--blue); }
+.catch-log li[data-rarity="Epic"] { background: var(--yellow); }
+.catch-log li[data-rarity="Legendary"] { background: var(--pink); }
+
+/* ---------- footer ---------- */
+
+.site-foot {
+  max-width: 1180px;
+  margin: 26px auto 0;
+  text-align: center;
+  font-family: "Space Mono", ui-monospace, monospace;
+  font-size: 13px;
+}

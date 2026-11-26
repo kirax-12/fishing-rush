@@ -1,0 +1,1 @@
+{"description":"A 60-second arcade fishing minigame in TypeScript + Canvas 2D. No assets, everything drawn in code.","devDependencies":{"typescript":"^5.6.0"},"name":"fishing-rush","private":true,"scripts":{"build":"tsc -p tsconfig.json"},"version":"1.0.0"}
